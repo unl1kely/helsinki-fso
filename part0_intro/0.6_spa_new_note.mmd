@@ -1,0 +1,17 @@
+sequenceDiagram
+    title SPA New Note Sequence Diagram
+    participant browser
+    participant server
+
+    Note right of browser: The user types a note and clicks "Save"
+    Note right of browser: {spa.js} prevents the default form submission (preventing a page reload)
+    Note right of browser: + adds the new note to the internal notes list dynamically
+    Note right of browser: + redraws the notes list on the page locally
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    Note left of server: Server parses the JSON data and saves the new note to the database
+    server-->>browser: 201 Created (JSON Response: { "message": "note created" })
+    deactivate server
+
+    Note right of browser: The JavaScript callback confirms success (and handles errors if necessary)
