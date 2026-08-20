@@ -15,19 +15,14 @@ const Part = (props) => (
 )
 
 // Text according to the pic as of 20/8/2026
-// const Total = (props) => <p>total of {props.total} exercises</p>
+const Total = (props) => <b><p>total of {props.total} exercises</p></b>
 
 const Course = ({name, parts}) =>
   <div>
     <Header course={name} />
     <Content parts={parts} />
-    {/* <Total
-      total={
-        parts[0].exercises +
-        parts[1].exercises +
-        parts[2].exercises
-      }
-    /> */}
+    <Total
+      total={ parts.reduce((iter_val, part) => iter_val + part.exercises, 0) } />
   </div>
 
 const App = () => {
@@ -49,6 +44,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       },
     ]
   }
